@@ -1,58 +1,115 @@
-{{> header}}
-    <img src="assests/images/logo.png" class="logo" alt="hai.js logo">
-    <nav class="Panel__Navigation">
-      <a class="selected">Home</a>
-      <a href="/people.html">People</a>
-      <a href="/companies.html">Organizations</a>
-    </nav>
+<html>
+<head>
+  <title>hi.JS | Kathmandu Javscript User Group</title>
+  <meta name="description" content="hi JS is a community of JavaScript developers in Kathmandu. To subscribe to our events, join
+  the meetup group on meetup.com/KathmanduJS">
 
-   <section class="Panel__Call-to-action">
+  <meta name="HandheldFriendly" content="true"/>
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes"/>
 
-    </section>
-    <ol class="Panel__Timeline Timeline">
-      {{#each episodes}}
-      <li class="Timeline__Slice Slice">
-        <section class="Slice__Meta Meta">
-          <h1 class="Meta__Episode">Episode {{episode}}</h1>
-          <date class="Meta__Date">{{day}} {{month}}, {{year}}</date>
-          <time class="Meta__Time">{{startsAtHr}}:{{startsAtMin}}{{startsAtAMPM}} - {{endsAtHr}}:{{endsAtMin}}{{endsAtAMPM}}</time>
-          <p class="Meta__Venue">{{venue.organisation}}</p>
-          <p class="Meta__Venue-address">{{venue.addr_line1}}, {{venue.addr_line2}}</p>
-        </section>
+  <!-- Schema.org markup for Google+ -->
+  <meta itemprop="name" content="hi.JS | Kathmandu Javscript User Group">
+  <meta itemprop="description" content="hi JS is a community of JavaScript developers in Kathmandu. To subscribe to our events, join
+  the meetup group on meetup.com/KathmanduJS">
+  <meta itemprop="image" content="{{URL}}/assests/site/images/logo.png">
 
-        <section class="Slice__Details">
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="http://sumn2u.github.io/hijs">
+  <meta name="twitter:title" content="hi.JS | Kathmandu Javscript User Group">
+  <meta name="twitter:description" content="hi JS is a community of JavaScript developers in Kathmandu. To subscribe to our events, join
+  the meetup group on meetup.com/KathmanduJS">
+  <meta name="twitter:image" content="{{URL}}/assests/site/images/logo_120X120.png">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="hi JS user group. Meetups, People and Community."/>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="http://sumn2u.github.io/hijs" />
+  <meta property="og:image" content="{{URL}}/assests/site/images/logo.png" />
+  <meta property="og:description" content="hi JS is a community of JavaScript developers in Kathmandu.We aim to share
+  knowledge and expertise in. Javascript and related technologies through regular meetups, workshops and discussions."/>
+  <meta property="og:site_name" content="Kathmandu JS" />
+  <meta property="fb:admins" content="443642025803350" />
+
+  <link rel="shortcut icon" href="{{URL}}/assests/site/favicon/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="{{URL}}/assests/site/favicon/favicon.ico" type="image/x-icon">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'/>
+  <link rel="stylesheet" href="{{URL}}/assests/site/css/index.css" type="text/css"/>
+</head>
+<body>
+    <div class="Panel__Navigation">
+      <img class="logo" src="{{URL}}/assests/site/images/logo.png" alt="Kathmandu JS User Group Logo" />
+    </div>
+
+    <div class="Panel__Meetup">
+      <div class="Meetup">
+        <h1 class="Meetup__Name">Kathmandu Javascript Meetup</h1>
+        <p class="Meetup__Episode">/Episode {{episode}}, {{year}}</p>
+
+        <date class="Meetup__Date">{{month}} {{day}}</date>
+        <date class="Meetup__Time">
+        {{startsAtHr}}<span class="Meetup__Time--thin">:{{startsAtMin}}{{startsAtAMPM}}</span>
+         - {{endsAtHr}}<span class="Meetup__Time--thin">:{{endsAtMin}}{{endsAtAMPM}}</span>
+        </date>
+
+        <h2 class="Meetup__Venue"> <a target="_blank"  href="map.html?place={{placeId}}">{{venue.organisation}}</a></h2>
+        <p class="Meetup__Address">{{venue.addr_line1}}<br/>{{venue.addr_line2}}</p>
+
+        <img class="Meetup__Ornament" src="{{URL}}/assests/site/images/flower.png" alt="flower"/>
+      </div>
+    </div>
+
+      <div class="Panel__Schedule">
+        <ol class="Sessions">
           {{#each session}}
-          <article class="Session">
+          <li class="Session">
+            <h3 class="Session__Number">session #{{index}}</h3>
+            <hr class="Session__Splitter"/>
+
             <h2 class="Session__Title">{{title}}</h2>
+            <p class="Session__Time">@ {{time}}</p>
 
-            {{#each speakers}}
-            <p class="Session__Speaker"><span class="Session__Speaker-label">Speaker - </span>{{info.name}}</p>
-            <p class="Session__Speaker-organization">{{info.designation}} at {{info.organization}}.</p>
-            {{~/each}}
+            <p class="Session__description">
+              {{description}}
+            </p>
 
-            <p class="Session__Description">{{description}}</p>
-          </article>
+            <ol class="Speakers Session__Speaker">
+              {{#each speakers}}
+              <li class="Speaker">
+                <img class="Speaker__ProfilePicture" src="{{../../URL}}/{{file.path}}" alt="profile picture"/>
+                <h2 class="Speaker__Name">{{info.name}}</h2>
+                <p class="Speaker__DesignationAndWorkplace">{{info.designation}} at {{info.organization}}</p>
+              </li>
+              {{~/each}}
+            </ol>
+          </li>
           {{~/each}}
+        </ol>
 
-          <hr class="Splitter"/>
-
-          <p class="Sponsors-Supporters">
-            <span class="Sponsors-Supporters__Label">Sponsors: </span>
+        <div class="Panel__SponsorsAndSupporters">
+          <h2 class="SponsorsAndSupporters__Heading">Sponsors</h2>
+          <ol class="Sponsors">
             {{#each sponsors}}
-            {{info.name}},
+            <li class="Sponsor"><img class="Sponsor__Logo" src="{{../URL}}/{{file.path}}" alt="company 1" /></li>
             {{~/each}}
-          </p>
-
-          <p class="Sponsors-Supporters">
-            <span class="Sponsors-Supporters__Label">Supported by: </span>
+          </ol>
+          <hr class="SponsorsAndSupporters__Splitter"/>
+          <h2 class="SponsorsAndSupporters__Heading">Supporters</h2>
+          <ol class="Supporters">
             {{#each supporters}}
-            {{info.name}}
+            <li class="Supporter"><img class="Supporter__Logo" src="{{../URL}}/{{file.path}}" alt="company 2" /></li>
             {{~/each}}
-          </p>
-        </section>
-        <div class="Slice__Ornament"></div>
+          </ol>
+        </div>
 
-      </li>
-      {{~/each}}
-    </ol>
-{{> footer}}
+        <img class="chandra" src="{{URL}}/assests/site/images/chandra.png" alt="chandra logo" />
+        <p class="credits">crafted by, <a href="https://www.humanassistai.com/" target="_blank">Human Assist AI</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+  </script>
+</body>
+</html>

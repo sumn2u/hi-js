@@ -22,23 +22,28 @@ var rootFolder = config.rootFolder;
 
 function _publishEp(episodes) {
   episodes && episodes.forEach(function(episode) {
-    episode.URL =  "https://raw.githubusercontent.com/developers-nepal/haijs/master/site-admin";
+    episode.URL =  "https://hijs.herokuapp.com";
 
-    var hbsTemplate = fs.readFileSync(path.join(__dirname, '../templates/site/index.hbs')).toString();
+    var hbsTemplate = fs.readFileSync(path.join(__dirname, '../client/templates/views/index.hbs')).toString();
     var template = handlebars.compile(hbsTemplate);
     var htmlTemplate = template(episode);
+    // var changeFileExt = file.fileName.replace(/.hbs/g, ".html");
+    // make a next index.html file too which ovrides the fingerprinitng
+    // fs.writeFileSync(path.join(__dirname, `../../${buildDir}/`+ changeFileExt), htmlTemplate, 'utf8', function(err) {
+    //   if (err) throw err;
+    // });
     
-    fs.writeFileSync(path.join(__dirname, '../dist/' + episode.date.replace(/\s+/g, '_') + '.html'), htmlTemplate, 'utf8', function(err) {
+    fs.writeFileSync(path.join(__dirname, `../../${buildDir}/` + episode.date.replace(/\s+/g, '_') + '.html'), htmlTemplate, 'utf8', function(err) {
       if (err) throw err;
     });
     // make a next index.html file too which ovrides the fingerprinitng
-    fs.writeFileSync(path.join(__dirname, '../dist/index.html'), htmlTemplate, 'utf8', function(err) {
+    fs.writeFileSync(path.join(__dirname, `../../${buildDir}/index.html`), htmlTemplate, 'utf8', function(err) {
       if (err) throw err;
     });
-    fs.copyFile('map.html', path.join(__dirname, '../dist/map.html'), (err) => {
-        if (err) throw err;
-        console.log('source.txt was copied to destination.txt');
-    });
+    // fs.copyFile('map.html', path.join(__dirname, '../dist/map.html'), (err) => {
+    //     if (err) throw err;
+    //     console.log('source.txt was copied to destination.txt');
+    // });
   });
 }
 
@@ -59,17 +64,21 @@ var copyRecursiveSync = function(src, dest) {
 };
 
 function buldDist(distFolder, episodes, people, companies){
+  
   let peopleL = {
     "people" : people,
-    "page_title" : "People page | hai.js"
+    "page_title" : "People page | hai.js",
+    "URL":'http://localhost:4000'
   }
   let episodesL = {
     "episodes" : episodes,
-    "page_title" : "Episode page | hai.js"
+    "page_title" : "Episode page | hai.js",
+    "URL":'http://localhost:4000'
   }
   let companiesL = {
     "companies": companies,
-    "page_title" : "Companies page | hai.js"
+    "page_title" : "Companies page | hai.js",
+    "URL":'http://localhost:4000'
   }
   let peopleVSepisodeL = merge.mergeJSON(peopleL,episodesL )
   let finalJSON = merge.mergeJSON(peopleVSepisodeL, companiesL)
@@ -204,8 +213,9 @@ router.get('/', function(req, res) {
           _populate(e, "sponsors", _companies);
           _populate(e, "supporters", _companies);
         });
+        _publishEp(docs)
 
-        _publish(docs, _people, _companies);
+        // _publish(docs, _people, _companies);
         res.redirect('/meetups');
       });
     });
