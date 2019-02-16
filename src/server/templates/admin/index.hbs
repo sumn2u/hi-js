@@ -1,0 +1,63 @@
+
+    <img src="/assests/images/logo.png" class="logo" alt="hai.js logo">
+    <nav class="Panel__Navigation">
+      <a class="selected" href="/meetups">Episodes</a>
+      <a href="/people">People</a>
+      <a href="/companies">Organizations</a>
+      <a href="/publish" class="Button Publish">Publish</a>
+    </nav>
+
+    <section class="Panel__Call-to-action">
+      <a href="/meetups/forms/save" class="Button Button--Success">Add new episode</a>
+    </section>
+
+    <ol class="Panel__Timeline Timeline">
+      {{#each episodes}}
+      <li class="Timeline__Slice Slice">
+        <section class="Slice__Meta Meta">
+          <h1 class="Meta__Episode">Episode {{episode}}</h1>
+          <date class="Meta__Date">{{day}} {{month}}, {{year}}</date>
+          <time class="Meta__Time">{{startsAtHr}}:{{startsAtMin}}{{startsAtAMPM}} - {{endsAtHr}}:{{endsAtMin}}{{endsAtAMPM}}</time>
+          <p class="Meta__Venue">{{venue.organisation}}</p>
+          <p class="Meta__Venue-address">{{venue.addr_line1}}, {{venue.addr_line2}}</p>
+          <div class="Speaker__Actions">
+            <a href='/meetups/delete/{{_id}}' class="Button Button--Danger">Remove</a>
+          </div>
+        </section>
+
+        <section class="Slice__Details">
+          {{#each session}}
+          <article class="Session">
+            <h2 class="Session__Title">{{title}}</h2>
+
+            {{#each speakers}}
+            <p class="Session__Speaker"><span class="Session__Speaker-label">Speaker - </span>{{info.name}}</p>
+            <p class="Session__Speaker-organization">{{info.designation}} at {{info.organization}}.</p>
+            {{~/each}}
+
+            <p class="Session__Description">{{description}}</p>
+          </article>
+          {{~/each}}
+
+          <hr class="Splitter"/>
+
+          <p class="Sponsors-Supporters">
+            <span class="Sponsors-Supporters__Label">Sponsors: </span>
+            {{#each sponsors}}
+            {{info.name}},
+            {{~/each}}
+          </p>
+
+          <p class="Sponsors-Supporters">
+            <span class="Sponsors-Supporters__Label">Supported by: </span>
+            {{#each supporters}}
+            {{info.name}}
+            {{~/each}}
+          </p>
+        </section>
+        <div class="Slice__Ornament"></div>
+
+      </li>
+      {{~/each}}
+    </ol>
+

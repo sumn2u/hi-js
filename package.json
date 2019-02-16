@@ -1,0 +1,33 @@
+{
+	"name": "hai.js",
+	"version": "1.0.0",
+	"description": "HAI JS Script",
+	"main": "hai.js",
+	"scripts": {
+		"admin": "node hai.js",
+		"start": "node hai.js",
+		"api": "node server.js"
+	},
+	"keywords": [
+		"haijs",
+		"kathmandu",
+		"community"
+	],
+	"author": "Suman Kunwar",
+	"license": "ISC",
+	"devDependencies": {
+		"express": "^4.16.4",
+		"express-handlebars": "^3.0.0",
+		"fs-extra": "^7.0.1",
+		"handlebars": "^4.1.0",
+		"merge-jsons": "0.0.5",
+		"moment": "^2.24.0",
+		"multer": "^1.4.1",
+		"nedb": "^1.8.0",
+		"open": "0.0.5"
+	},
+	"dependencies": {
+		"hai-server": "0.0.3",
+		"npm-run-all": "^4.1.5"
+	}
+}
