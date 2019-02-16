@@ -1,1 +1,1 @@
-web: npm run admin
+web: node hai.js
