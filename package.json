@@ -5,7 +5,7 @@
 	"main": "hai.js",
 	"scripts": {
 		"admin": "node hai.js",
-		"start": "node hai.js",
+		"start": "node hai.js ",
 		"api": "node server.js"
 	},
 	"keywords": [
