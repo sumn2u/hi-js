@@ -379,7 +379,9 @@ body {
 
 
 .footer {
-  height: 50px;
+  bottom: 0px;
+  position: fixed;
+  width: 100%;
   text-align: center;
 }
   
