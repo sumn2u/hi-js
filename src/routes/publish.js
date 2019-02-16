@@ -138,12 +138,12 @@ function _publish(episodes, people, companies) {
     // get all folder ;
     let distFolder = path.join(__dirname, `../${buildDir}/`)
 
-    fsExtra.remove(distFolder).then(() => {
+    // fsExtra.remove(distFolder).then(() => {
       //done
       buldDist(distFolder, episodes, people, companies)
-    }).catch(err => {
-      console.error(err)
-    })
+    // }).catch(err => {
+    //   console.error(err)
+    // })
 }
 
 /* Publish all meetups. */
